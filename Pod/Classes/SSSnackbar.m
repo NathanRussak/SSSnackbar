@@ -283,12 +283,32 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
 
 - (NSArray *)horizontalLayoutConstraints {
     if (!_horizontalLayoutConstraints) {
-        
-        _horizontalLayoutConstraints =
-        [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[self]-(5)-|"
-                                                options:0
-                                                metrics:nil
-                                                  views:NSDictionaryOfVariableBindings(self)];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            _horizontalLayoutConstraints =
+            [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[self]-(5)-|"
+                                                    options:0
+                                                    metrics:nil
+                                                      views:NSDictionaryOfVariableBindings(self)];
+        }
+        else {
+            UIView * superView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
+            _horizontalLayoutConstraints = @[
+
+                                             [NSLayoutConstraint constraintWithItem:self
+                                                                          attribute:NSLayoutAttributeCenterX
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:superView
+                                                                          attribute:NSLayoutAttributeCenterX
+                                                                         multiplier:1.0f constant:0.0f],
+                                             [NSLayoutConstraint constraintWithItem:self
+                                                                          attribute:NSLayoutAttributeWidth
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:nil
+                                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                                         multiplier:1.0
+                                                                           constant:400.0]
+                                             ];
+        }
     }
     
     return _horizontalLayoutConstraints;
