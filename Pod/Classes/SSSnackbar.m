@@ -113,7 +113,10 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
     }
     
     UIView *superview = topController.view;
-    
+    [self showInView:superview];
+}
+
+- (void) showInView:(UIView *)superview {
     BOOL shouldReplaceExistingSnackbar = currentlyVisibleSnackbar != nil;
     
     if (shouldReplaceExistingSnackbar) {
@@ -156,13 +159,12 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
 }
 
 - (void)replaceExistingSnackbar {
-    UIView *superview = [UIApplication sharedApplication].delegate.window.rootViewController.view;
     [currentlyVisibleSnackbar invalidateTimer];
     [currentlyVisibleSnackbar removeFromSuperview];
-    [superview addSubview:self];
-    [superview addConstraints:self.horizontalLayoutConstraints];
-    [superview addConstraints:self.visibleVerticalLayoutConstraints];
-    [superview layoutIfNeeded];
+    [self.superview addSubview:self];
+    [self.superview addConstraints:self.horizontalLayoutConstraints];
+    [self.superview addConstraints:self.visibleVerticalLayoutConstraints];
+    [self.superview layoutIfNeeded];
     [self setupContentLayout];
 }
 
@@ -289,13 +291,12 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
                                                       views:NSDictionaryOfVariableBindings(self)];
         }
         else {
-            UIView * superView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
             _horizontalLayoutConstraints = @[
 
                                              [NSLayoutConstraint constraintWithItem:self
                                                                           attribute:NSLayoutAttributeCenterX
                                                                           relatedBy:NSLayoutRelationEqual
-                                                                             toItem:superView
+                                                                             toItem:self.superview
                                                                           attribute:NSLayoutAttributeCenterX
                                                                          multiplier:1.0f
                                                                            constant:0.0f],
