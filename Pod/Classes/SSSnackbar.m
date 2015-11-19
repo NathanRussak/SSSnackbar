@@ -140,8 +140,7 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
                          completion:nil];
     }
     
-    if (self.duration > 0)
-    {
+    if (self.duration > 0) {
         self.dismissalTimer = [NSTimer scheduledTimerWithTimeInterval:self.duration
                                                                target:self
                                                              selector:@selector(timeoutForDismissal:)
@@ -149,8 +148,7 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
                                                               repeats:NO];
     }
     
-    if (_canTapToDismiss)
-    {
+    if (_canTapToDismiss) {
         [self addGestureRecognizer:_tapToDismissRecognizer];
     }
     
@@ -299,7 +297,8 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
                                                                           relatedBy:NSLayoutRelationEqual
                                                                              toItem:superView
                                                                           attribute:NSLayoutAttributeCenterX
-                                                                         multiplier:1.0f constant:0.0f],
+                                                                         multiplier:1.0f
+                                                                           constant:0.0f],
                                              [NSLayoutConstraint constraintWithItem:self
                                                                           attribute:NSLayoutAttributeWidth
                                                                           relatedBy:NSLayoutRelationEqual
@@ -347,14 +346,12 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
     [self layoutIfNeeded];
 }
 
-- (void) setMessageTextColor:(UIColor *)color
-{
+- (void) setMessageTextColor:(UIColor *)color {
     [_messageLabel setTextColor:color];
 }
 
 - (void) setActionTextColor:(UIColor *)color
-                   forState:(UIControlState)state
-{
+                   forState:(UIControlState)state {
     [_actionButton setTitleColor:color forState:state];
 }
 
