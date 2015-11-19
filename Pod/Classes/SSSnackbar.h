@@ -11,7 +11,7 @@
 IB_DESIGNABLE
 @interface SSSnackbar : UIView
 /**
- *  The duration of time for which the snackbar should be shown on-screen. Changing this value only has effect before the snackbar is presented by sending it the show message.
+ *  The duration of time for which the snackbar should be shown on-screen, else 0 if the snackbar should be displayed indefinitely. Changing this value only has effect before the snackbar is presented by sending it the show message.
  */
 @property (assign, nonatomic) NSTimeInterval duration;
 /**
@@ -37,7 +37,7 @@ IB_DESIGNABLE
  *
  *  @param message        The message displayed on the snackbars's text label.
  *  @param actionText     The text displayed on the snackbar's action button.
- *  @param duration       The duration of time for which the snackbar should remain on the screen.
+ *  @param duration       The duration of time for which the snackbar should remain on the screen, else 0 if the snackbar should be displayed indefinitely.
  *  @param actionBlock    A block to be called when the user presses the action button.
  *  @param dismissalBlock A block to be called when the snackbar is removed from the screen by any means other than the user having pressed the action button. Can be nil.
  *
@@ -52,7 +52,7 @@ IB_DESIGNABLE
  *
  *  @param message        The message displayed on the snackbars's text label.
  *  @param actionText     The text displayed on the snackbar's action button.
- *  @param duration       The duration of time for which the snackbar should remain on the screen.
+ *  @param duration       The duration of time for which the snackbar should remain on the screen, else 0 if the snackbar should be displayed indefinitely.
  *  @param actionBlock    A block to be called when the user presses the action button.
  *  @param dismissalBlock A block to be called when the snackbar is removed from the screen by any means other than the user having pressed the action button. Can be nil.
  */

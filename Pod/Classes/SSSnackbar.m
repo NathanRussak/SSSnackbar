@@ -133,11 +133,16 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
                          }
                          completion:nil];
     }
-    self.dismissalTimer = [NSTimer scheduledTimerWithTimeInterval:self.duration
-                                                           target:self
-                                                         selector:@selector(timeoutForDismissal:)
-                                                         userInfo:nil
-                                                          repeats:NO];
+    
+    if (self.duration > 0)
+    {
+        self.dismissalTimer = [NSTimer scheduledTimerWithTimeInterval:self.duration
+                                                               target:self
+                                                             selector:@selector(timeoutForDismissal:)
+                                                             userInfo:nil
+                                                              repeats:NO];
+    }
+    
     currentlyVisibleSnackbar = self;
 }
 
