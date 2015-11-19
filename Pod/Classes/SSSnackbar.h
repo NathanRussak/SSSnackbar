@@ -19,6 +19,10 @@ IB_DESIGNABLE
  */
 @property (assign, nonatomic) BOOL actionIsLongRunning;
 /**
+ * If this value is set to YES, then the user can tap within the body of the Snackbar to dismiss it without executing it's associated action. Changing this value only has effect before the snackbar is presented by sending it the show message.
+ */
+@property (assign, nonatomic) BOOL canTapToDismiss;
+/**
  *  A block which is called when the user presses the action button on the snackbar.
  *
  *  Generally used to reverse some change made by the user which prompted the snackbar to be displayed.

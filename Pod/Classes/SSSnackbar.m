@@ -22,6 +22,8 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
 @property (strong, nonatomic) NSArray *horizontalLayoutConstraints;
 
 @property (assign, nonatomic) BOOL actionBlockDispatched;
+
+@property (strong, nonatomic) UITapGestureRecognizer * tapToDismissRecognizer;
 @end
 
 @implementation SSSnackbar
@@ -73,6 +75,9 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
         _separator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         _separator.backgroundColor = [UIColor colorWithWhite:0.99 alpha:.1];
         _separator.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        _tapToDismissRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(dismiss)];
         
         [self addSubview:_messageLabel];
         [self addSubview:_actionButton];
@@ -143,6 +148,11 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
                                                               repeats:NO];
     }
     
+    if (_canTapToDismiss)
+    {
+        [self addGestureRecognizer:_tapToDismissRecognizer];
+    }
+    
     currentlyVisibleSnackbar = self;
 }
 
@@ -167,6 +177,7 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
 
 - (void)dismissAnimated:(BOOL)animated {
     [self invalidateTimer];
+    [self removeGestureRecognizer:_tapToDismissRecognizer];
     [self.superview removeConstraints:self.visibleVerticalLayoutConstraints];
     [self.superview addConstraints:self.hiddenVerticalLayoutConstraints];
     currentlyVisibleSnackbar = nil;
@@ -194,6 +205,7 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
 
 - (IBAction)executeAction:(id)sender {
     [self invalidateTimer];
+    [self removeGestureRecognizer:_tapToDismissRecognizer];
     if (self.actionIsLongRunning) {
         UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         indicator.translatesAutoresizingMaskIntoConstraints = NO;
