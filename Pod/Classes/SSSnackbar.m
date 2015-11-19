@@ -74,6 +74,7 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
         
         _separator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         _separator.backgroundColor = [UIColor colorWithWhite:0.99 alpha:.1];
+        _separator.hidden = TRUE;
         _separator.translatesAutoresizingMaskIntoConstraints = NO;
         
         _tapToDismissRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -324,6 +325,17 @@ static SSSnackbar *currentlyVisibleSnackbar = nil;
     
     [self addConstraints:constraints];
     [self layoutIfNeeded];
+}
+
+- (void) setMessageTextColor:(UIColor *)color
+{
+    [_messageLabel setTextColor:color];
+}
+
+- (void) setActionTextColor:(UIColor *)color
+                   forState:(UIControlState)state
+{
+    [_actionButton setTitleColor:color forState:state];
 }
 
 @end

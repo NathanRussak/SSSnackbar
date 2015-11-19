@@ -79,4 +79,18 @@ IB_DESIGNABLE
  *  @param animated Determines whether the snackbars's removal from the screen is animated or not.
  */
 - (void)dismissAnimated:(BOOL)animated;
+/**
+ * Changes the color of the Snackbar's message text.
+ *
+ * @param color The new color that the message text should use.
+ */
+- (void) setMessageTextColor:(UIColor *)color;
+/**
+ * Changes the color of the Snackbar's action button text.
+ *
+ * @param color The new color that the action button text should use.
+ * @param state The button state that this text color should be applied to.
+ */
+- (void) setActionTextColor:(UIColor *)color
+                   forState:(UIControlState)state;
 @end
